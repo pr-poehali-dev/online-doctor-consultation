@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "name": "Register new doctor successfully",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "fullName": "Доктор Петр Иванов",
+        "email": "doctor@example.com",
+        "phone": "+7 900 123 4567",
+        "specialty": "Терапевт",
+        "experienceYears": 10,
+        "education": "МГУ им. Ломоносова, 2010",
+        "licenseNumber": "ЛО-77-01-123456",
+        "price": 1500,
+        "isFree": false,
+        "bio": "Опытный терапевт",
+        "password": "test123"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "doctor": {
+          "fullName": "string",
+          "email": "string",
+          "specialty": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject registration with missing required fields",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "fullName": "Доктор Тест",
+        "email": "test@example.com"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

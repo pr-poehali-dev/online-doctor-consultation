@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "Register new patient successfully",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "fullName": "Иван Тестов",
+        "email": "test@example.com",
+        "phone": "+7 900 123 4567",
+        "dateOfBirth": "1990-01-01",
+        "password": "test123"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "patient": {
+          "fullName": "string",
+          "email": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject registration with missing fields",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "fullName": "Иван Тестов",
+        "email": "test2@example.com"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

@@ -5,10 +5,15 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
+import RegisterPatientForm from '@/components/RegisterPatientForm';
+import RegisterDoctorForm from '@/components/RegisterDoctorForm';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [showPatientRegister, setShowPatientRegister] = useState(false);
+  const [showDoctorRegister, setShowDoctorRegister] = useState(false);
 
   const doctors = [
     {
@@ -149,7 +154,8 @@ const Index = () => {
 
             <div className="flex items-center space-x-3">
               <Button variant="outline">Войти</Button>
-              <Button>Регистрация</Button>
+              <Button onClick={() => setShowPatientRegister(true)}>Регистрация пациента</Button>
+              <Button variant="secondary" onClick={() => setShowDoctorRegister(true)}>Я врач</Button>
             </div>
           </div>
         </div>
@@ -599,6 +605,18 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <Dialog open={showPatientRegister} onOpenChange={setShowPatientRegister}>
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+          <RegisterPatientForm onSuccess={() => setShowPatientRegister(false)} />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showDoctorRegister} onOpenChange={setShowDoctorRegister}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <RegisterDoctorForm onSuccess={() => setShowDoctorRegister(false)} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
